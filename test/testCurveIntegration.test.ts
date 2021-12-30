@@ -57,9 +57,30 @@ const setup = deployments.createFixture(async () => {
 describe("Curve pool test (via ethers.js)", function () {
   it("getPoolBalance", async () => {
     const { deployer } = await setup();
-    await deployer.cryptoSwap.token();
+    expect(await deployer.testCurveIntegration.getPoolBalance(0)).to.eq(0);
+    expect(await deployer.testCurveIntegration.getPoolBalance(1)).to.eq(0);
   });
-  it("getLpToken", async () => {});
-  it("addLiquidity", async () => {});
-  it("exchangeTokens", async () => {});
+  it("getLpToken", async () => {
+    const { deployer } = await setup();
+    console.log(
+      "Lp tokens are",
+      await deployer.testCurveIntegration.getLpToken()
+    );
+  });
+  it("addLiquidity", async () => {
+    const { deployer } = await setup();
+
+    await deployer.testCurveIntegration.addLiquidity(
+      ethers.utils.parseEther("1")
+    );
+  });
+  it("exchangeTokens", async () => {
+    const { deployer } = await setup();
+    await deployer.testCurveIntegration.addLiquidity(
+      ethers.utils.parseEther("1")
+    );
+    await deployer.testCurveIntegration.exchangeTokens(
+      ethers.utils.parseEther("1")
+    );
+  });
 });
