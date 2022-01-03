@@ -48,14 +48,15 @@ contract TestCurveIntegration {
     }
 
     function exchangeTokens(uint256 _amount) external returns(uint256) {
-        // create the tokens to swap (note: it's tokenOne because the exchange bellow is harcoded to do so)
+        // create the tokens to swap (note: it's tokenOne because the exchange below is harcoded to do so)
         tokenOne.mint(_amount);
 
-        uint256 firstCoin = 1;
-        uint256 secondCoin = 0;
+        uint256 firstCoin = 0;
+        uint256 secondCoin = 1;
         uint256 minAmountOfTokensToReceive = 0;
-        uint256 nbOfTokensReceived = market.exchange(firstCoin, secondCoin, _amount, minAmountOfTokensToReceive);
+        // we provide `_amount` of `firstCoin` in exchange for `secondCoin`
+        uint256 lpTokensReceived = market.exchange(firstCoin, secondCoin, _amount, minAmountOfTokensToReceive);
 
-        return nbOfTokensReceived;
+        return lpTokensReceived;
     }
 }

@@ -5,6 +5,8 @@ pragma solidity 0.8.4;
 interface ICryptoSwap {
     function token() external view returns (address);
 
+    function coins(uint256 i) external view returns (address);
+
     function get_virtual_price() external view returns (uint256);
     
     function balances(uint256 i) external view returns (uint256);
