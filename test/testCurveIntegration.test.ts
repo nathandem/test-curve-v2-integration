@@ -72,6 +72,17 @@ describe("Curve pool test (via TestCurveIntegration)", function () {
     expect((await deployer.cryptoSwap.balances(1)).eq(oneUnit)).to.be.true;
   });
 
+  it("get_dy", async () => {
+    const { deployer } = await setup();
+
+    await deployer.testCurveIntegration.addLiquidity(oneUnit);
+
+    const lpTokensToReceive = await deployer.testCurveIntegration.getExchangeEstimate(
+      halfUnit
+    );
+    expect(lpTokensToReceive).not.to.be.null;
+  });
+
   it("exchangeTokens", async () => {
     const { deployer } = await setup();
 
