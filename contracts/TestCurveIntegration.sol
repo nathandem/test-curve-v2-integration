@@ -32,12 +32,15 @@ contract TestCurveIntegration {
     }
 
     function addLiquidity(uint256 _amount) external returns(uint256) {
+        uint256 tokenOneAmount = _amount / 2;
+        uint256 tokenTwoAmount = _amount / 2;
+
         // create tokens to be supplied to pool
-        tokenOne.mint(_amount);
-        tokenTwo.mint(_amount);
+        tokenOne.mint(tokenOneAmount);
+        tokenTwo.mint(tokenTwoAmount);
         // supply liquidity to pool
         uint256 min_mint_amount = 0;
-        uint256[2] memory mint_amounts = [_amount, _amount];
+        uint256[2] memory mint_amounts = [tokenOneAmount, tokenTwoAmount];
         uint256 newLpTokens = market.add_liquidity(mint_amounts, min_mint_amount);
         
         // value returned for tests
@@ -45,9 +48,13 @@ contract TestCurveIntegration {
     }
 
     function exchangeTokens(uint256 _amount) external returns(uint256) {
+        // create the tokens to swap (note: it's tokenOne because the exchange bellow is harcoded to do so)
+        tokenOne.mint(_amount);
+
         uint256 firstCoin = 1;
         uint256 secondCoin = 0;
-        uint256 nbOfTokensReceived = market.exchange(firstCoin, secondCoin, _amount, 0);
+        uint256 minAmountOfTokensToReceive = 0;
+        uint256 nbOfTokensReceived = market.exchange(firstCoin, secondCoin, _amount, minAmountOfTokensToReceive);
 
         return nbOfTokensReceived;
     }

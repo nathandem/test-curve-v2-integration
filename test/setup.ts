@@ -46,7 +46,7 @@ export const setup = deployments.createFixture(async () => {
   const users = await setupUsers(await getUnnamedAccounts(), contracts);
 
   return {
-    users,
     deployer: await setupUser(deployer, contracts),
+    users,
   };
 });

@@ -5,8 +5,6 @@ import { ethers } from "hardhat";
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const deployer = (await hre.getUnnamedAccounts())[0];
 
-  console.log(`Current network is ${hre.network.name.toString()}`);
-
   const tokenOne = await ethers.getContract("TokenOne", deployer);
   const tokenTwo = await ethers.getContract("TokenTwo", deployer);
   const pool = await ethers.getContract("CryptoSwap", deployer);
