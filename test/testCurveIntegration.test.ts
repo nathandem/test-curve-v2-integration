@@ -37,14 +37,14 @@ describe("Curve pool test (via TestCurveIntegration)", function () {
   it("addLiquidity", async () => {
     const { deployer } = await setup();
 
-    expect((await deployer.cryptoSwap.balances(1)).eq(0)).to.be.true;
+    expect((await deployer.cryptoSwap.balances(0)).eq(0)).to.be.true;
     expect((await deployer.cryptoSwap.balances(1)).eq(0)).to.be.true;
 
     const oneUnit = ethers.utils.parseEther("1");
     await deployer.testCurveIntegration.addLiquidity(oneUnit);
 
     const halfUnit = oneUnit.div(2);
-    expect((await deployer.cryptoSwap.balances(1)).eq(halfUnit)).to.be.true;
+    expect((await deployer.cryptoSwap.balances(0)).eq(halfUnit)).to.be.true;
     expect((await deployer.cryptoSwap.balances(1)).eq(halfUnit)).to.be.true;
   });
 
