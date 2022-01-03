@@ -35,7 +35,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       utils.parseEther("0.0000055") /*  adjustment_step*/,
       utils.parseUnits("5", 9) /*  admin_fee*/,
       BigNumber.from(600) /*  ma_half_time*/,
-      utils.parseEther("1.2") /*  initial_price*/, // TODO: dont hardcode initial price
+      utils.parseEther("1") /*  initial_price*/, // TODO: dont hardcode initial price
       curveLPtoken.address,
       [tokenOne.address, tokenTwo.address],
     ],
