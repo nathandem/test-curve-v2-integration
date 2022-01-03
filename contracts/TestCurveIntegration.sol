@@ -47,6 +47,14 @@ contract TestCurveIntegration {
         return newLpTokens;
     }
 
+    function getExchangeEstimate(uint256 _amount) external returns(uint256) {
+        uint256 firstCoin = 0;
+        uint256 secondCoin = 1;
+        uint256 lpTokensToReceive = market.get_dy(firstCoin, secondCoin, _amount);
+
+        return lpTokensToReceive;
+    }
+
     function exchangeTokens(uint256 _amount) external returns(uint256) {
         // create the tokens to swap (note: it's tokenOne because the exchange below is harcoded to do so)
         tokenOne.mint(_amount);
