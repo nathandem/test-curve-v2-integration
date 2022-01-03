@@ -5,6 +5,7 @@ import {
   ICryptoSwap,
   TestCurveIntegration,
 } from "../typechain";
+import { CryptoSwap } from "../contracts-vyper/typechain/CryptoSwap";
 import { Contract } from "ethers";
 
 async function setupUsers<T extends { [contractName: string]: Contract }>(
@@ -36,7 +37,7 @@ export const setup = deployments.createFixture(async () => {
   const contracts = {
     tokenOne: <TokenOne>await ethers.getContract("TokenOne"),
     tokenTwo: <TokenTwo>await ethers.getContract("TokenTwo"),
-    cryptoSwap: <ICryptoSwap>await ethers.getContract("CryptoSwap"),
+    cryptoSwap: <CryptoSwap>await ethers.getContract("CryptoSwap"),
     testCurveIntegration: <TestCurveIntegration>(
       await ethers.getContract("TestCurveIntegration")
     ),
